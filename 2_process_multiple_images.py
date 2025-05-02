@@ -12,6 +12,9 @@ from scipy.ndimage import binary_fill_holes
 # Setup result storage
 results = []
 
+# Setup directories
+chosen_dir = "data/artificial"  # You can replace this with a file picker if needed
+
 # Helper function to analyze particles
 def analyze_particles(binary_img):
     labeled = label(binary_img)
@@ -90,16 +93,5 @@ def save_results(GphnClusterNumber, GphnClusterSize, SynClusterNumber, CellSize,
     df.to_csv(os.path.join(save_dir, f"ClusterAnalysis_{just_name}.tsv"), sep='\t', index=False)
 
 
-if __name__ == "__main__":
-    import tkinter as tk
-    from tkinter import filedialog
-
-    root = tk.Tk()
-    root.withdraw()
-    chosen_dir = filedialog.askdirectory(title="Choose a directory where your .tif files are saved")
-
-    if chosen_dir:
-        process_files(chosen_dir)
-        print("Analysis complete.")
-    else:
-        print("No directory selected.")
+# Run the full batch
+process_files(chosen_dir)
