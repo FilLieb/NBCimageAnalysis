@@ -16,7 +16,7 @@ from aicsimageio import AICSImage
 from skimage.io import imshow
 
 # load an nd2 file
-img = AICSImage('data/nd2/WT_001.nd2')
+img = AICSImage('../data/nd2/WT_001.nd2')
 data = img.get_image_data("TCZYX")  # Choose the correct dimension order
 print(data.shape)
 

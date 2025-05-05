@@ -1,7 +1,7 @@
 # what packages are needed and install them
 
 import importlib.metadata, subprocess, sys
-required  = {'aicsimageio', 'scikit-image'}
+required  = {'aicsimageio', 'readlif>=0.6.4', 'scikit-image'}
 installed = {pkg.metadata['Name'] for pkg in importlib.metadata.distributions()}
 missing   = required - installed
 
@@ -15,9 +15,9 @@ from matplotlib import pyplot as plt
 from aicsimageio import AICSImage
 from skimage.io import imshow
 
-# load an nd2 file
-img = AICSImage('data/tif/Lucie_condensation Sf9_WT_own_parameters_G3-Image003.tif')
-data = img.get_image_data("TZCYX")  # Choose the correct dimension order
+# load a lif file
+img = AICSImage('../data/lif/Project.lif')
+data = img.get_image_data("TCZYX")  # Choose the correct dimension order
 print(data.shape)
 
 # Pick the first timepoint and z-slice
@@ -26,19 +26,10 @@ z_index = 0
 
 # Extract each channel slice (assume 3 channels, for example)
 channel_0 = data[t_index, 0, z_index, :, :]
-channel_1 = data[t_index, 1, z_index, :, :]
 
 
 # make a quick figure to display individual channels
-fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-
-axes[0].imshow(channel_0, cmap='gray')
-axes[0].set_title("Channel 0")
-
-axes[1].imshow(channel_1, cmap='gray')
-axes[1].set_title("Channel 1")
-
-plt.tight_layout()
+imshow(channel_0)
 plt.show()
 
 # extract meta data, i.e. size of voxel in µm

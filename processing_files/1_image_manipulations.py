@@ -11,7 +11,7 @@ def get_voxel_size_from_aics_image(aics_image):
             aics_image.physical_pixel_sizes.X)
 
 # load an nd2 file
-img = AICSImage('data/nd2/WT_001.nd2')
+img = AICSImage('../data/nd2/WT_001.nd2')
 data = img.get_image_data("TCZYX")  # Choose the correct dimension order
 
 # pick the first timepoint and z-slice

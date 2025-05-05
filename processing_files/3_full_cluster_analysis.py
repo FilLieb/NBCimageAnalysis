@@ -12,7 +12,7 @@ from skimage.util import img_as_bool
 import tifffile as tiff
 
 # Setup directories
-chosen_dir = "data/nd2"  # You can replace this with a file picker if needed
+chosen_dir = "../data/nd2"  # You can replace this with a file picker if needed
 
 results = []
 

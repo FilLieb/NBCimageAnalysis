@@ -13,7 +13,7 @@ from scipy.ndimage import binary_fill_holes
 results = []
 
 # Setup directories
-chosen_dir = "data/artificial"  # You can replace this with a file picker if needed
+chosen_dir = "../data/artificial"  # You can replace this with a file picker if needed
 
 # Helper function to analyze particles
 def analyze_particles(binary_img):
