@@ -12,7 +12,7 @@ from skimage.util import img_as_bool
 import tifffile as tiff
 
 # Setup directories
-chosen_dir = "data/"  # You can replace this with a file picker if needed
+chosen_dir = "data/nd2"  # You can replace this with a file picker if needed
 
 results = []
 
@@ -93,4 +93,4 @@ process_directory(chosen_dir)
 
 # Save all results to TSV
 results_df = pd.DataFrame(results)
-results_df.to_csv(os.path.join(chosen_dir, "ClusterAnalysis_All.tsv"), sep="\t", index=False)
+results_df.to_csv(os.path.join(chosen_dir, "ClusterAnalysis_All.csv"), sep="\t", index=False)
