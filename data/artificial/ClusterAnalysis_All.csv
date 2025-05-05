@@ -1,0 +1,3 @@
+ClusterNumber,ClusterSize,SynClusterNumber,CellSize,Cell
+3,8598.666666666666,2,401258,test_3col.tif
+0,NA,NA,401258,test_noGphn_3col.tif

@@ -95,3 +95,7 @@ def save_results(GphnClusterNumber, GphnClusterSize, SynClusterNumber, CellSize,
 
 # Run the full batch
 process_files(chosen_dir)
+
+# After processing all files, save the combined results
+final_df = pd.DataFrame(results)
+final_df.to_csv(os.path.join(chosen_dir, "ClusterAnalysis_All.csv"), index=False)
