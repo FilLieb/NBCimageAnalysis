@@ -1,14 +1,20 @@
 # what packages are needed and install them
-
 import importlib.metadata, subprocess, sys
-required  = {'aicsimageio', 'aicsimageio[nd2]', 'scikit-image'}
+
+# Only include the packages we actually need
+required = {'aicsimageio[nd2]', 'scikit-image'}
 installed = {pkg.metadata['Name'] for pkg in importlib.metadata.distributions()}
-missing   = required - installed
+missing = required - installed
 
 if missing:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip'])
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', *missing])
-
+    try:
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip'])
+        # Add --no-deps flag to avoid dependency conflicts
+        for package in missing:
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', package])
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to install packages: {e}")
+        sys.exit(1)
 
 # load packages
 from matplotlib import pyplot as plt
@@ -50,7 +56,5 @@ def get_voxel_size_from_aics_image(aics_image):
             aics_image.physical_pixel_sizes.Y,
             aics_image.physical_pixel_sizes.X)
 
-
 voxel = get_voxel_size_from_aics_image(img)
-
 print(voxel)
