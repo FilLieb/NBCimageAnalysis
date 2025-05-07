@@ -2,7 +2,7 @@
 import importlib.metadata, subprocess, sys
 
 # Only include the packages we actually need
-required = {'aicsimageio[nd2]', 'scikit-image'}
+required = {'aicsimageio[nd2]'}
 installed = {pkg.metadata['Name'] for pkg in importlib.metadata.distributions()}
 missing = required - installed
 

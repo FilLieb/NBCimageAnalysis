@@ -1,7 +1,7 @@
 # what packages are needed and install them
 
 import importlib.metadata, subprocess, sys
-required  = {'aicsimageio', 'scikit-image'}
+required  = {'aicsimageio', 'scikit-image', 'matplotlib'}
 installed = {pkg.metadata['Name'] for pkg in importlib.metadata.distributions()}
 missing   = required - installed
 
