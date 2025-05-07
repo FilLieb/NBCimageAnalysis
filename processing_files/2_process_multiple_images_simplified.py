@@ -1,3 +1,21 @@
+# what packages are needed and install them
+import importlib.metadata, subprocess, sys
+
+# Only include the packages we actually need
+required = {'numpy==1.26.3'}
+installed = {pkg.metadata['Name'] for pkg in importlib.metadata.distributions()}
+missing = required - installed
+
+if missing:
+    try:
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip'])
+        # Add --no-deps flag to avoid dependency conflicts
+        for package in missing:
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', package])
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to install packages: {e}")
+        sys.exit(1)
+
 import os
 from aicsimageio import AICSImage
 import numpy as np
