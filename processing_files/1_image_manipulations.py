@@ -53,6 +53,3 @@ axes[3].set_title("difference")
 
 plt.tight_layout()
 plt.show()
-
-
-dog = dog - gaussian(dog, sigma=10)  # Subtract background
