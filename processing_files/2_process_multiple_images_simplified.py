@@ -50,7 +50,7 @@ def process_image(filepath, save_dir):
     Gphn_thresh = Gphn > threshold_otsu(Gphn)
     Gphn_labeled, Gphn_mask = analyze_particles(Gphn_thresh)
     GphnClusterNumber = len(Gphn_labeled)
-    GphnClusterSize = voxel[1] * np.sum([r.area for r in Gphn_labeled]) / GphnClusterNumber if GphnClusterNumber else 'NA'
+    GphnClusterSize = voxel[1] * voxel[1] * np.sum([r.area for r in Gphn_labeled]) / GphnClusterNumber if GphnClusterNumber else 'NA'
 
     # Analyze vGAT
     vGAT_thresh = vGAT > threshold_otsu(vGAT)
@@ -63,7 +63,7 @@ def process_image(filepath, save_dir):
 
     # Cell size from BFP
     BFP_thresh = BFP > threshold_otsu(BFP)
-    CellSize = voxel[1] * np.sum(BFP_thresh)
+    CellSize = voxel[1] * voxel[1] * np.sum(BFP_thresh)
 
     save_results(GphnClusterNumber, GphnClusterSize, SynClusterNumber, CellSize, original_image_name, just_name, save_dir)
 
@@ -86,7 +86,7 @@ def abort(original_image_name, just_name, save_dir, BFP, voxel):
     GphnClusterSize = 'NA'
     SynClusterNumber = 'NA'
     BFP_thresh = BFP > threshold_otsu(BFP)
-    CellSize = voxel[1] * np.sum(BFP_thresh)
+    CellSize = voxel[1] * voxel[1] * np.sum(BFP_thresh)
     save_results(GphnClusterNumber, GphnClusterSize, SynClusterNumber, CellSize, original_image_name, just_name, save_dir)
 
 
