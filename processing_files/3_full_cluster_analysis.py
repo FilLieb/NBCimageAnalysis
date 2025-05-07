@@ -9,7 +9,7 @@ from skimage.segmentation import clear_border
 from scipy.ndimage import binary_fill_holes
 from skimage import img_as_ubyte
 from skimage.util import img_as_bool
-import tifffile as tiff
+
 
 # Setup directories
 chosen_dir = "../data/nd2"  # You can replace this with a file picker if needed

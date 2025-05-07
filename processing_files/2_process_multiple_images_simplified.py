@@ -1,10 +1,8 @@
 import os
-import tifffile
+from aicsimageio import AICSImage
 import numpy as np
 import pandas as pd
-from skimage import io, filters, measure, morphology
 from skimage.measure import label, regionprops
-from skimage.morphology import binary_closing
 from skimage.filters import threshold_otsu
 from skimage.util import img_as_ubyte
 from scipy.ndimage import binary_fill_holes
@@ -26,27 +24,33 @@ def process_files(directory):
 
 # Process a single image
 def process_image(filepath, save_dir):
-    image = tifffile.imread(filepath)
-    if image.ndim == 5:  # Assumes image is in XYCTZ format
-        image = image[:, :, :, 0, 0]  # Take the first time point and z-slice
+    image = AICSImage(filepath)
+    data = image.get_image_data("TZCYX")  # Choose the correct dimension order
+    print(data.shape)
 
     original_image_name = os.path.basename(filepath)
     just_name = os.path.splitext(original_image_name)[0]
 
-    # Split channels (C1: Gphn, C2: vGAT, C3: BFP)
-    Gphn = image[0]
-    vGAT = image[1]
-    BFP = image[2]
+    # Extract each channel slice (3 channels)
+    t_index = 0
+    z_index = 0
+
+    Gphn = data[t_index, z_index, 0, :, :]
+    vGAT = data[t_index, z_index, 1, :, :]
+    BFP = data[t_index, z_index, 2, :, :]
+
+    voxel = get_voxel_size_from_aics_image(image)
 
     if Gphn.max() == 0:
-        abort(original_image_name, just_name, save_dir, BFP)
+        abort(original_image_name, just_name, save_dir, BFP, voxel)
         return
+
 
     # Analyze Gphn
     Gphn_thresh = Gphn > threshold_otsu(Gphn)
     Gphn_labeled, Gphn_mask = analyze_particles(Gphn_thresh)
     GphnClusterNumber = len(Gphn_labeled)
-    GphnClusterSize = np.sum([r.area for r in Gphn_labeled]) / GphnClusterNumber if GphnClusterNumber else 'NA'
+    GphnClusterSize = voxel[1] * np.sum([r.area for r in Gphn_labeled]) / GphnClusterNumber if GphnClusterNumber else 'NA'
 
     # Analyze vGAT
     vGAT_thresh = vGAT > threshold_otsu(vGAT)
@@ -59,9 +63,15 @@ def process_image(filepath, save_dir):
 
     # Cell size from BFP
     BFP_thresh = BFP > threshold_otsu(BFP)
-    CellSize = np.sum(BFP_thresh)
+    CellSize = voxel[1] * np.sum(BFP_thresh)
 
     save_results(GphnClusterNumber, GphnClusterSize, SynClusterNumber, CellSize, original_image_name, just_name, save_dir)
+
+# extract meta data, i.e. size of voxel in µm
+def get_voxel_size_from_aics_image(aics_image):
+    return (aics_image.physical_pixel_sizes.Z,
+            aics_image.physical_pixel_sizes.Y,
+            aics_image.physical_pixel_sizes.X)
 
 # Helper function to analyze particles
 def analyze_particles(binary_img):
@@ -71,12 +81,12 @@ def analyze_particles(binary_img):
     return regions, mask
 
 # abort function, when no Gphn clusters are detected
-def abort(original_image_name, just_name, save_dir, BFP):
+def abort(original_image_name, just_name, save_dir, BFP, voxel):
     GphnClusterNumber = 0
     GphnClusterSize = 'NA'
     SynClusterNumber = 'NA'
     BFP_thresh = BFP > threshold_otsu(BFP)
-    CellSize = np.sum(BFP_thresh)
+    CellSize = voxel[1] * np.sum(BFP_thresh)
     save_results(GphnClusterNumber, GphnClusterSize, SynClusterNumber, CellSize, original_image_name, just_name, save_dir)
 
 
