@@ -8,6 +8,7 @@ from skimage.measure import label
 
 import pandas as pd
 import numpy as np
+import openpyxl
 
 # Setup result storage
 results = []
@@ -63,11 +64,29 @@ def process_image(filepath, save_dir):
     df = pd.DataFrame(statistics)
     column_mean = df.mean()
 
-    series = pd.Series([just_name])
-    index = ['image']
-    series.index = index
-    w_name = pd.concat([column_mean, series])
-    save_results(w_name, just_name, save_dir)
+    # creating additional info
+    num_gphn_per_area = column_mean['num_gphn'] / column_mean['area_map2_total']
+
+    image_name = just_name
+    word = 'CNTRL'
+    if word in image_name:
+        condition = 'CNTRL'
+    else:
+        condition = 'Antimycin A'
+
+    result = {
+        'area_gphn': [column_mean['area_gphn']],
+        'intensity_gphn': [column_mean['intensity_gphn']],
+        'num_gphn': [column_mean['num_gphn']],
+        'area_map2_total': [column_mean['area_map2_total']],
+        'num_gphn_per_area': [num_gphn_per_area],
+        'image': [image_name],
+        'condition': [condition]
+    }
+
+    dr = pd.DataFrame(result)
+
+    save_results(dr, just_name, save_dir)
 
 # extract meta data, i.e. size of voxel in µm
 def get_voxel_size_from_aics_image(aics_image):
@@ -94,17 +113,19 @@ def save_results(result, just_name, save_dir):
     # Make sure the save directory exists
     os.makedirs(save_dir, exist_ok=True)
 
+    # Append the dictionary result, not the DataFrame
     results.append(result)
-    df = pd.DataFrame([result])
+    
+    # Create DataFrame for individual file
+    df = pd.DataFrame(result)
     output_path = os.path.join(save_dir, f"ClusterAnalysis_{just_name}.tsv")
     # Ensure the output directory for this specific file exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_csv(output_path, sep='\t', index=False)
 
-
 # Run the full batch
 process_files(chosen_dir)
 
-# After processing all files, save the combined results
-final_df = pd.DataFrame(results)
-final_df.to_csv(os.path.join(chosen_dir, "ClusterAnalysis_All.csv"), index=False)
+# After processing all files, concatenate all results
+final_df = pd.concat([pd.DataFrame(r) for r in results], ignore_index=True)
+final_df.to_excel(os.path.join(chosen_dir, "ClusterAnalysis_All.xlsx"), index=False)
