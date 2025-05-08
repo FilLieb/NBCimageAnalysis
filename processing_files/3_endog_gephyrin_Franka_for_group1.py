@@ -33,7 +33,7 @@ import openpyxl
 results = []
 
 # Setup directories
-chosen_dir = "../data/group5"  # You can replace this with a file picker if needed
+chosen_dir = "../data/group1"  # You can replace this with a file picker if needed
 
 # Process all .tif files in a directory recursively
 def process_files(directory):
@@ -87,11 +87,11 @@ def process_image(filepath, save_dir):
     num_gphn_per_area = column_mean['num_gphn'] / column_mean['area_map2_total']
 
     image_name = just_name
-    word = 'CNTRL'
+    word = 'Antimycin'
     if word in image_name:
-        condition = 'CNTRL'
-    else:
         condition = 'Antimycin A'
+    else:
+        condition = 'CNTRL'
 
     result = {
         'area_gphn': [column_mean['area_gphn']],
