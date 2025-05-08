@@ -1,3 +1,22 @@
+# what packages are needed and install them
+import importlib.metadata, subprocess, sys
+
+# Only include the packages we actually need
+required = {'pyclesperanto-prototype==0.24.5', 'openpyxl'}
+installed = {pkg.metadata['Name'] for pkg in importlib.metadata.distributions()}
+missing = required - installed
+
+if missing:
+    try:
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip'])
+        # Add --no-deps flag to avoid dependency conflicts
+        for package in missing:
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--no-deps', package])
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to install packages: {e}")
+        sys.exit(1)
+
+
 import os
 from aicsimageio import AICSImage
 
@@ -14,7 +33,7 @@ import openpyxl
 results = []
 
 # Setup directories
-chosen_dir = "../data/group3"  # You can replace this with a file picker if needed
+chosen_dir = "../data/test"  # You can replace this with a file picker if needed
 
 # Process all .tif files in a directory recursively
 def process_files(directory):
