@@ -103,7 +103,7 @@ def make_fig(treat, group, gphn, map2, binary_gphn, binary_map2):
 
     axes[1].imshow(map2, cmap=plt.cm.gray)
     axes[1].contour(binary_map2, [0.5], linewidths=1.2, colors='r')
-    axes[1].set_title("threshold on DoG")
+    axes[1].set_title("MAP2")
 
     fig.suptitle(group + treat)  # Changed plt.title to fig.suptitle for better positioning
     plt.tight_layout()
