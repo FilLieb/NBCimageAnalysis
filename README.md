@@ -10,7 +10,8 @@ The images you have acquired have been deposited on a server that is hosted by C
 [![OMERO](https://img.shields.io/badge/OMERO-Open%20Microscopy-00acac?logo=microscope&logoColor=white)](https://www.openmicroscopy.org/omero/downloads/)
 
 Once the software is downloaded and installed, run the software and you should see something that looks like this:
-![Data pipeline overview](data/assets/pipeline_screenshot.png)
+
+![Data pipeline overview](data/assets/omero_setup.png)
 
 ## notebooks
 | # | Notebook | Description | Link |
