@@ -13,6 +13,15 @@ Once the software is downloaded and installed, run the software and you should s
 
 ![Data pipeline overview](data/assets/omero_setup.png)
 
+
+When you click on the wrench symbol (see above highlighted in yellow) add the following server name: omero-1.cecad.uni-koeln.de
+
+Afterwards attempt to login using your uniKIM credentials. I will manually add ypu to the Neurobiochemistry Course and you will have access to your data from the confocal microscope sessions.
+
+You can access the Omero webclient directly in your browser by clicking on the badge below:
+
+[![OMERO](https://img.shields.io/badge/OMERO%20webclient-00acac?logo=microscope&logoColor=white)](https://omero.cecad.uni-koeln.de/webclient/login)
+
 ## notebooks
 | # | Notebook | Description | Link |
 |---|----------|-------------|------|
