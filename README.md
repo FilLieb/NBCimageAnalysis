@@ -28,7 +28,7 @@ You can access the Omero webclient directly in your browser by clicking on the b
 | # | Notebook | Description | Link |
 |---|----------|-------------|------|
 | 1 | first notebook  | new to Python? check out these basic functions... | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/0_first_notebook.ipynb) |
-| 2 | images in Python  | load and display images | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/1_loading_and_display_images_tif.ipynb) |
+| 2 | images in Python  | load and display images | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/1n_loading_and_display_images_tif.ipynb) |
 
 
 
