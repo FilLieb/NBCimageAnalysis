@@ -32,6 +32,7 @@ You can access the Omero webclient directly in your browser by clicking on the b
 | 3 | images in Python  | load and display a .lif file | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/1_opening_lif.ipynb) |
 | 4 | images in Python  | image processing basics | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/2n_image_manipulation_lif.ipynb) |
 | 5 | images in Python  | image processing advanced | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/3n_image_manipulations_advanced.ipynb) |
+| 6 | images in Python  | pixel classification | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/7_image_machine_learning.ipynb) |
 
 
 ## requirements
