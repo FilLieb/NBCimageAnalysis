@@ -36,6 +36,7 @@ You can access the Omero webclient directly in your browser by clicking on the b
 | 7 | images in Python  | pixel classification on 4 channels | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/8_image_machine_learning_4channels.ipynb) |
 | 8 | images in Python  | use pixel classification models on .lif | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/9_segment_LIF_files.ipynb) |
 | 9 | images in Python  | quantify images, easy example image | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/10_quantify_thing_in_images.ipynb) |
+| 10 | images in Python  | quantify all images | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/11_machine_learning_analysis.ipynb) |
 
 
 ## requirements
