@@ -1,4 +1,4 @@
-# image analysis
+# image analysis (we could start small sessions in week 1 (in 2027))
 This project is for students in the Neurobiochemistry Module ([SoSe26] Neurobiochemistry (MN-BC-SM08)) at the University of Cologne.
 
 ## overview
