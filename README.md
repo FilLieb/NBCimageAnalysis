@@ -39,5 +39,12 @@ You can access the Omero webclient directly in your browser by clicking on the b
 | 10 | images in Python  | quantify all images | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/11_machine_learning_analysis.ipynb) |
 
 
+## notebooks 2027
+| # | Notebook | Description | Link |
+|---|----------|-------------|------|
+| 1 | interactive pixel classification  | annotate using napari | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FilLieb/NBCimageAnalysis/blob/master/learning/0_first_notebook.ipynb) |
+
+
+
 ## requirements
 We will be using various packages that have been developed by others. 
